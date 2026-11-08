@@ -135,6 +135,8 @@ section.alt { background: var(--card); border-block: 1px solid var(--line); }
 
 footer { padding-block: 32px; font-size: 14px; color: var(--ink-soft); }
 footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.copy-email { margin-left: 6px; font: inherit; font-size: 13px; color: var(--sky); background: transparent; border: 1px solid currentColor; border-radius: 999px; padding: 1px 10px; cursor: pointer; }
+.copy-email:hover { background: var(--sky-soft); }
 
 @media (max-width: 860px) {
   .hero .wrap, .privacy { grid-template-columns: 1fr; gap: 32px; }
@@ -293,10 +295,29 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 <footer>
   <div class="wrap">
     <span>© 2026 Just4Me Education</span>
-    <span>Questions? Email <a href="mailto:memberservice@just4meed.com">memberservice@just4meed.com</a></span>
+    <span>Questions? Email <a href="mailto:memberservice@just4meed.com">memberservice@just4meed.com</a><button type="button" class="copy-email" data-email="memberservice@just4meed.com" aria-live="polite">Copy</button></span>
     <span>just4meed.com</span>
   </div>
 </footer>
+
+<script>
+document.querySelectorAll('.copy-email').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var email = btn.getAttribute('data-email');
+    function done() { btn.textContent = 'Copied!'; setTimeout(function () { btn.textContent = 'Copy'; }, 2000); }
+    function fallback() {
+      var t = document.createElement('textarea');
+      t.value = email; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
+      document.body.appendChild(t); t.select();
+      try { document.execCommand('copy'); done(); } catch (e) { btn.textContent = email; }
+      document.body.removeChild(t);
+    }
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(email).then(done, fallback);
+    } else { fallback(); }
+  });
+});
+</script>
 
 </body>
 </html>

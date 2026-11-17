@@ -14,7 +14,7 @@ These settings live in GitHub, not in files, so someone with admin rights has to
 - [ ] **General → Default branch:** the default branch is currently `claude/project-thread-mbp78d`, and the live site is built from it. Rename it to `main` (Settings → Branches → rename), then confirm **Pages** still shows `main` as its source.
 - [ ] **Rules → Rulesets → New branch ruleset** targeting the default branch:
   - Require a pull request before merging (1 approval once there's a second editor).
-  - Require status checks to pass: `security-check`.
+  - Require status checks to pass: `security-check`, `browser-tests (chrome)` and `browser-tests (chromium)`.
   - Block force pushes. Restrict deletions.
 - [ ] **Pages:** tick **Enforce HTTPS**. Keep the custom domain set to `just4meed.com`.
 - [ ] **Advanced Security** (Code security):
@@ -39,5 +39,6 @@ The demo lives in the separate `just4me-education-demo` repository. Apply sectio
 | File | What it does |
 |---|---|
 | `.github/workflows/security-check.yml` | On every pull request and push: checks every page follows the policy. Weekly and after each push to the default branch: also checks the live site (HTTPS redirect, policy served, `security.txt` valid). |
+| `tests/browser_tests.py` | Opens the site in Chrome and Chromium and checks that visitors can use it (page, fonts, links, keyboard, mobile, dark mode, accessibility, videos) and that injected scripts, frames, forms and data leaks are blocked. Screenshots are saved with each run. |
 | `.github/scripts/check_site.py` | The checks themselves. Run `python3 .github/scripts/check_site.py --live` locally to try it. |
 | `.github/dependabot.yml` | Opens pull requests when the GitHub Actions used by the workflow get security updates. |

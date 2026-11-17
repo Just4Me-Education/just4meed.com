@@ -100,6 +100,16 @@ section.alt .doc { background: var(--paper); }
 .doc-body ul { margin: 0; padding-left: 20px; }
 .doc .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
 .howto { margin-top: 24px; max-width: 75ch; }
+.pod { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 24px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px; align-items: start; }
+.pod audio { width: 100%; margin-top: 6px; }
+.pod-body { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.pod-body p { color: var(--ink-soft); }
+.chaps { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.chaps li { border-bottom: 1px solid var(--line); }
+.chaps button { all: unset; box-sizing: border-box; width: 100%; cursor: pointer; display: grid; grid-template-columns: 3.4em 1fr; gap: 10px; padding: 10px 4px; font-size: 16px; }
+.chaps button:hover, .chaps button:focus-visible { color: var(--sky); }
+.chaps .t { color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+@media (max-width: 760px) { .pod { grid-template-columns: 1fr; gap: 18px; padding: 18px; } }
 .back { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; background: var(--sky-soft); border-radius: var(--r); padding: 28px; }
 .back p { color: var(--ink-soft); max-width: 55ch; }
 a.brand:hover { color: var(--sky); }
@@ -131,11 +141,12 @@ a.brand:hover { color: var(--sky); }
     <div class="wrap">
       <span class="tag-sample">Sample content</span>
       <h1>See the kind of lessons we make</h1>
-      <p class="lede">These are early examples from our earth science work: short videos a student can watch in under a minute, and a full day of lessons with a guide for the parent and a workbook for the student.</p>
+      <p class="lede">These are early examples from our earth science work: short videos a student can watch in under a minute, a full day of lessons with a guide for the parent and a workbook for the student, and a history podcast for older students.</p>
       <p class="note">Samples only. Just4Me Education is still in development and not open for sign-up yet.</p>
       <div class="jump">
         <a class="btn btn-line btn-small" href="#shorts">Short videos</a>
         <a class="btn btn-line btn-small" href="#lesson">Sample lesson</a>
+        <a class="btn btn-line btn-small" href="#podcast">Sample podcast</a>
       </div>
     </div>
   </section>
@@ -223,7 +234,36 @@ a.brand:hover { color: var(--sky); }
     </div>
   </section>
 
-  <section class="band alt">
+  <section class="band alt" id="podcast">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Sample podcast</span>
+        <h2>Ratify This! Episode 1</h2>
+        <p class="lede">"The Group Project Nobody Finished." Benjamin Franklin hosts six founders as they argue over the Constitution and the Federalist Papers. Made for teen listeners.</p>
+        <div class="lesson-meta"><span class="chip">U.S. history and civics</span><span class="chip">About 10 minutes</span><span class="chip">Demo cut</span></div>
+      </div>
+      <div class="pod">
+        <div class="pod-body">
+          <h3>Listen to the demo</h3>
+          <p>This demo plays the opening through the sponsor break, then the wrap-up and closing.</p>
+          <audio id="pod-audio" controls preload="metadata" src="media/ratify-this-episode-1-demo.mp3">Your browser cannot play this audio.</audio>
+          <p class="note">Voices are computer-generated, and the music and sound effects are original. Essays discussed: Federalist Nos. 1 to 5 and 15, and Brutus No. 1.</p>
+        </div>
+        <div class="pod-body">
+          <h3>In this demo</h3>
+          <ol class="chaps">
+            <li><button type="button" data-t="0"><span class="t">0:00</span><span>Cold open</span></button></li>
+            <li><button type="button" data-t="35"><span class="t">0:35</span><span>Welcome and introductions</span></button></li>
+            <li><button type="button" data-t="349"><span class="t">5:49</span><span>A word from our sponsor</span></button></li>
+            <li><button type="button" data-t="466"><span class="t">7:46</span><span>Wrap-up</span></button></li>
+            <li><button type="button" data-t="580"><span class="t">9:40</span><span>Closing theme</span></button></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
     <div class="wrap">
       <div class="back">
         <div>
@@ -245,6 +285,13 @@ a.brand:hover { color: var(--sky); }
 </footer>
 
 <script>
+(function () {
+  var a = document.getElementById('pod-audio');
+  document.querySelectorAll('.chaps button').forEach(function (b) {
+    b.addEventListener('click', function () { a.currentTime = +b.getAttribute('data-t'); var p = a.play(); if (p && p.catch) p.catch(function () {}); });
+  });
+})();
+
 document.querySelectorAll('.copy-email').forEach(function (btn) {
   btn.addEventListener('click', function () {
     var email = btn.getAttribute('data-email');

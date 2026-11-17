@@ -9,6 +9,25 @@
   });
 })();
 
+// Click-to-play YouTube videos (sample page). Each video shows a still image stored on this site, so nothing
+// is loaded from YouTube (and YouTube can't set cookies) until the visitor presses play. The player is then
+// built here with the same safety settings as the template in SECURITY.md.
+document.querySelectorAll('.yt-play').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var id = btn.getAttribute('data-yt');
+    if (!/^[\w-]{11}$/.test(id)) return;
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+    f.title = btn.getAttribute('data-title') || 'Video';
+    f.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+    f.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-presentation allow-popups allow-popups-to-escape-sandbox');
+    f.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
+    f.setAttribute('allowfullscreen', '');
+    btn.replaceWith(f);
+    f.focus();
+  });
+});
+
 // "Copy" buttons next to email addresses.
 document.querySelectorAll('.copy-email').forEach(function (btn) {
   btn.addEventListener('click', function () {

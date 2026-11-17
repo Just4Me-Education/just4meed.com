@@ -4,14 +4,13 @@
 <meta charset="utf-8">
 <!-- Security policy: see SECURITY.md. Keep this as the first tag after charset so it applies to everything below it.
      Every page must carry this same policy. To allow a new video or content source, see "Adding content" in SECURITY.md. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://i.ytimg.com; media-src 'self'; frame-src https://www.youtube-nocookie.com https://www.youtube.com; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; manifest-src 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; media-src 'self'; frame-src https://www.youtube-nocookie.com; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; manifest-src 'self'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
 <title>Sample Content | Just4Me Education</title>
 <meta name="description" content="Examples of what Just4Me Education makes: short science videos and a sample day of lessons with a parent guide and student workbook.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="/fonts/fonts.css">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/sample/styles.css">
 </head>
@@ -52,30 +51,31 @@
         <span class="eyebrow">Short videos</span>
         <h2>Big ideas in under a minute</h2>
         <p class="lede">Each short explains one idea in under a minute. You decide whether, when, and how your student watches them.</p>
+        <p class="note">Nothing loads from YouTube until you press play. Once a video plays, YouTube may store cookies on your device. See our <a href="/privacy/">privacy notice</a>.</p>
       </div>
       <div class="shorts">
         <div class="short">
-          <div class="frame"><iframe sandbox="allow-scripts allow-same-origin allow-presentation allow-popups allow-popups-to-escape-sandbox" src="https://www.youtube-nocookie.com/embed/oAh0n-uqacQ?rel=0" title="Three types of rock" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <div class="frame"><button type="button" class="yt-play" data-yt="oAh0n-uqacQ" data-title="Three types of rock" aria-label="Play video: Three types of rock (plays from YouTube)"><img src="img/videos/oAh0n-uqacQ.jpg" width="360" height="640" alt="" loading="lazy"><span class="yt-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span><span class="yt-note" aria-hidden="true">Plays from YouTube</span></button></div>
           <h3>Three types of rock</h3>
           <p>Igneous, sedimentary, and metamorphic, and how each one forms.</p>
         </div>
         <div class="short">
-          <div class="frame"><iframe sandbox="allow-scripts allow-same-origin allow-presentation allow-popups allow-popups-to-escape-sandbox" src="https://www.youtube-nocookie.com/embed/1jrq0nOq-ZU?rel=0" title="Weathering, erosion, and deposition" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <div class="frame"><button type="button" class="yt-play" data-yt="1jrq0nOq-ZU" data-title="Weathering, erosion, and deposition" aria-label="Play video: Weathering, erosion, and deposition (plays from YouTube)"><img src="img/videos/1jrq0nOq-ZU.jpg" width="360" height="640" alt="" loading="lazy"><span class="yt-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span><span class="yt-note" aria-hidden="true">Plays from YouTube</span></button></div>
           <h3>Weathering, erosion, and deposition</h3>
           <p>How rock is broken down, carried away, and laid down somewhere new.</p>
         </div>
         <div class="short">
-          <div class="frame"><iframe sandbox="allow-scripts allow-same-origin allow-presentation allow-popups allow-popups-to-escape-sandbox" src="https://www.youtube-nocookie.com/embed/1wUhIwDUzL8?rel=0" title="Plate boundaries" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <div class="frame"><button type="button" class="yt-play" data-yt="1wUhIwDUzL8" data-title="Plate boundaries" aria-label="Play video: Plate boundaries (plays from YouTube)"><img src="img/videos/1wUhIwDUzL8.jpg" width="360" height="640" alt="" loading="lazy"><span class="yt-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span><span class="yt-note" aria-hidden="true">Plays from YouTube</span></button></div>
           <h3>Plate boundaries</h3>
           <p>What happens where Earth's plates pull apart, push together, or slide past.</p>
         </div>
         <div class="short">
-          <div class="frame"><iframe sandbox="allow-scripts allow-same-origin allow-presentation allow-popups allow-popups-to-escape-sandbox" src="https://www.youtube-nocookie.com/embed/Y9N46C8q49o?rel=0" title="Volcano types" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <div class="frame"><button type="button" class="yt-play" data-yt="Y9N46C8q49o" data-title="Volcano types" aria-label="Play video: Volcano types (plays from YouTube)"><img src="img/videos/Y9N46C8q49o.jpg" width="360" height="640" alt="" loading="lazy"><span class="yt-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span><span class="yt-note" aria-hidden="true">Plays from YouTube</span></button></div>
           <h3>Volcano types</h3>
           <p>The main kinds of volcanoes and what shapes them.</p>
         </div>
         <div class="short">
-          <div class="frame"><iframe sandbox="allow-scripts allow-same-origin allow-presentation allow-popups allow-popups-to-escape-sandbox" src="https://www.youtube-nocookie.com/embed/FLlQkswHX4U?rel=0" title="Earthquake waves" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <div class="frame"><button type="button" class="yt-play" data-yt="FLlQkswHX4U" data-title="Earthquake waves" aria-label="Play video: Earthquake waves (plays from YouTube)"><img src="img/videos/FLlQkswHX4U.jpg" width="360" height="640" alt="" loading="lazy"><span class="yt-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span><span class="yt-note" aria-hidden="true">Plays from YouTube</span></button></div>
           <h3>Earthquake waves</h3>
           <p>The different waves an earthquake sends through the ground.</p>
         </div>
@@ -175,7 +175,7 @@
   <div class="wrap">
     <span>© 2026 Just4Me Education</span>
     <span>Questions? Email <a href="mailto:memberservice@just4meed.com">memberservice@just4meed.com</a><button type="button" class="copy-email" data-email="memberservice@just4meed.com" aria-live="polite">Copy</button></span>
-    <span>just4meed.com</span>
+    <span><a href="/privacy/">Privacy</a> · just4meed.com</span>
   </div>
 </footer>
 

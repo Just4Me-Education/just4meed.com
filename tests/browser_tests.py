@@ -149,7 +149,7 @@ def axe_scan(page, axe_path, g, name):
     check(g, name, not res, ", ".join(res))
 
 
-PAGES = [("home", "/"), ("sample", "/sample/")]
+PAGES = [("home", "/"), ("sample", "/sample/"), ("privacy", "/privacy/")]
 
 
 def usability(browser, base, out, axe_path):
@@ -158,6 +158,8 @@ def usability(browser, base, out, axe_path):
         ctx = browser.new_context(viewport={"width": 1280, "height": 900})
         page = ctx.new_page()
         log = watch(page)
+        outside = []
+        page.on("request", lambda r: outside.append(r.url) if not r.url.startswith((base, "data:")) else None)
         resp = page.goto(base + path, wait_until="load")
         check(g, "page loads", resp.status == 200, f"HTTP {resp.status}")
         check(g, "headline visible", page.locator("h1").first.is_visible())
@@ -172,6 +174,10 @@ def usability(browser, base, out, axe_path):
         broken = page.evaluate("[...document.images].filter(i => i.complete && i.naturalWidth === 0).map(i => i.src)")
         check(g, "all images load", not broken, ", ".join(broken))
         check(g, "no policy violations on a normal visit", not log["csp"], "; ".join(log["csp"])[:300])
+        page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+        page.wait_for_timeout(800)
+        check(g, "nothing loads from other sites (Google, YouTube) before the visitor clicks",
+              not outside, ", ".join(sorted(set(outside)))[:300])
         check(g, "no page errors", not log["errors"], "; ".join(log["errors"])[:300])
 
         link = page.locator('footer a[href^="mailto:"]')
@@ -248,12 +254,28 @@ def sample_content(browser, base, out):
         top = page.evaluate(f"document.getElementById('{target}').getBoundingClientRect().top")
         check(g, f"jump button to #{target} works", -5 <= top < 200, f"section top at {top}px")
 
-    # YouTube shorts
-    frames = page.locator("iframe")
-    n = frames.count()
-    loaded = 0
+    # YouTube shorts: a still image until pressed, then the player
+    buttons = page.locator(".yt-play")
+    n = buttons.count()
+    check(g, "videos start as click-to-play images", n > 0 and page.locator("iframe").count() == 0,
+          f"{n} buttons, {page.locator('iframe').count()} players already loaded")
     for k in range(n):
-        frames.nth(k).scroll_into_view_if_needed()
+        buttons.first.scroll_into_view_if_needed()
+        buttons.first.click()
+    page.wait_for_timeout(500)
+    frames = page.locator("iframe")
+    made = frames.count()
+    safe = page.evaluate("""[...document.querySelectorAll('iframe')].every(f =>
+        f.src.startsWith('https://www.youtube-nocookie.com/embed/') &&
+        f.getAttribute('sandbox') === 'allow-scripts allow-same-origin allow-presentation allow-popups allow-popups-to-escape-sandbox' &&
+        f.getAttribute('referrerpolicy') === 'strict-origin-when-cross-origin')""")
+    check(g, "pressing play swaps each image for a sandboxed player", made == n and safe, f"{made} of {n} players, settings ok: {safe}")
+    # The site asks the player to start at once (autoplay=1). YouTube refuses to start playback in
+    # automated browsers on cloud machines ("Video unavailable"), so to check that each video itself
+    # works, reload the players here without autoplay. Confirm autoplay by hand in a normal browser.
+    page.evaluate("""document.querySelectorAll('iframe').forEach(f => {
+        f.src = f.src.replace('autoplay=1&', '').replace('?autoplay=1', ''); })""")
+    loaded = 0
     page.wait_for_timeout(4000)
     yt = [f for f in page.frames if "youtube-nocookie.com/embed" in f.url]
     for f in yt:

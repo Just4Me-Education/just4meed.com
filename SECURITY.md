@@ -72,10 +72,13 @@ Use this template. Replace `VIDEO_ID` and the title:
 Put the file in the repo (for example `media/intro.mp4`) and link it with a relative address:
 
 ```html
-<video src="/media/intro.mp4" controls preload="metadata"></video>
+<video controls preload="metadata" width="640">
+  <source src="/media/intro.webm" type="video/webm">
+  <source src="/media/intro.mp4" type="video/mp4">
+</video>
 ```
 
-No policy change is needed. Keep large files out of git where possible: GitHub warns at 50 MB and rejects files over 100 MB.
+Include both formats: Chromium and some Linux browsers can't play MP4 on its own, and older Safari prefers MP4. No policy change is needed. Keep large files out of git where possible: GitHub warns at 50 MB and rejects files over 100 MB.
 
 ### Links
 

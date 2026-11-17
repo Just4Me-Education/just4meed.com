@@ -63,6 +63,7 @@ def build_site(tmp):
 {YOUTUBE_EMBED}
 <video id="webm" src="/media/sample.webm" controls muted preload="auto" width="320"></video>
 <video id="mp4" src="/media/sample.mp4" controls muted preload="auto" width="320"></video>
+<video id="both" controls muted preload="auto" width="320"><source src="/media/sample.webm" type="video/webm"><source src="/media/sample.mp4" type="video/mp4"></video>
 <p><a id="newtab" href="/index.html" target="_blank" rel="noopener noreferrer">Open in a new tab</a></p>
 </div></section></main>"""
     page = re.sub(r"<main id=\"top\">.*</main>", body, index, flags=re.S)
@@ -196,7 +197,7 @@ def usability(browser, base, out, axe_path):
 
         page.evaluate("window.scrollTo(0, 0)")
         reached = False
-        for _ in range(60):
+        for _ in range(300):  # tabbing passes through each YouTube player's controls
             page.keyboard.press("Tab")
             if page.evaluate("document.activeElement && document.activeElement.matches('footer a[href^=\"mailto:\"]')"):
                 reached = True
@@ -332,12 +333,15 @@ def media(browser, base, out):
     page.screenshot(path=str(out / "video.png"))
 
     # Videos stored on the site
-    for vid, soft in (("webm", False), ("mp4", True)):
+    # MP4 (H.264) alone doesn't play in Chromium builds without licensed codecs, so it's a warning;
+    # the documented template (WebM + MP4) must play everywhere.
+    for vid, soft in (("both", False), ("webm", False), ("mp4", True)):
         state = page.evaluate(f"""async () => {{ const v = document.getElementById('{vid}');
             try {{ await v.play(); }} catch (e) {{ return 'error: ' + e.message; }}
             await new Promise(r => setTimeout(r, 1200));
             return v.currentTime > 0.3 ? 'playing' : 'stuck at ' + v.currentTime; }}""")
-        check(g, f"self-hosted {vid.upper()} video plays", state == "playing", state, soft=soft)
+        label = "WebM + MP4 template" if vid == "both" else vid.upper() + " only"
+        check(g, f"self-hosted video plays ({label})", state == "playing", state, soft=soft)
 
     # New-tab link
     with page.expect_popup() as pop:

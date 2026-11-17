@@ -79,6 +79,10 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
 .btn-sky { background: var(--sky); color: #fff; }
 .hero2 .wrap { padding-block: 56px 40px; display: flex; flex-direction: column; gap: 16px; }
 .tag-sample { align-self: flex-start; display: inline-flex; gap: 8px; align-items: center; background: var(--sun); color: var(--sun-ink); font-weight: 700; font-size: 14px; padding: 6px 12px; border-radius: 999px; }
+.custom { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 8px; }
+.custom div { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--sun); border-radius: 10px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+.custom p { color: var(--ink-soft); font-size: 16px; }
+@media (max-width: 760px) { .custom { grid-template-columns: 1fr; } }
 .jump { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
 section.band { padding-block: 56px; }
 section.alt { background: var(--card); border-block: 1px solid var(--line); }
@@ -140,8 +144,13 @@ a.brand:hover { color: var(--sky); }
   <section class="hero2">
     <div class="wrap">
       <span class="tag-sample">Sample content</span>
-      <h1>See the kind of lessons we make</h1>
-      <p class="lede">These are early examples from our earth science work: short videos a student can watch in under a minute, a full day of lessons with a guide for the parent and a workbook for the student, and a history podcast for older students.</p>
+      <h1>See the kind of content we will make for your student</h1>
+      <p class="lede">These are early examples: short videos, a full day of lessons with a parent guide and student workbook, and a history podcast. With Just4Me, content like this will be created custom for your student, built around their interests and their learning needs.</p>
+      <div class="custom">
+        <div><h3>Built around their interests</h3><p>Love dinosaurs, trains, or horses? Examples, stories, and activities are built around what your student enjoys.</p></div>
+        <div><h3>Fitted to their learning needs</h3><p>Reading level, read-aloud, shorter steps, more breaks, or extra challenge, set for your student.</p></div>
+        <div><h3>You are in charge</h3><p>You review, change, or skip anything, and you decide how and when your student uses it.</p></div>
+      </div>
       <p class="note">Samples only. Just4Me Education is still in development and not open for sign-up yet.</p>
       <div class="jump">
         <a class="btn btn-line btn-small" href="#shorts">Short videos</a>
@@ -156,7 +165,7 @@ a.brand:hover { color: var(--sky); }
       <div class="head">
         <span class="eyebrow">Short videos</span>
         <h2>Big ideas in under a minute</h2>
-        <p class="lede">Each short gives a student a quick, visual start on one idea. In a lesson plan, a short is used as a warm-up before reading or a hands-on activity.</p>
+        <p class="lede">Each short explains one idea in under a minute. You decide whether, when, and how your student watches them.</p>
       </div>
       <div class="shorts">
         <div class="short">
@@ -267,8 +276,8 @@ a.brand:hover { color: var(--sky); }
     <div class="wrap">
       <div class="back">
         <div>
-          <h2>Built around each student</h2>
-          <p>When Just4Me opens, lessons like these will be shaped to each student's interests, reading level, and pace, and you will review every one before your student sees it.</p>
+          <h2>Made for your student. Run by you.</h2>
+          <p>When Just4Me opens, videos, lessons, and podcasts like these will be created for your student's interests, reading level, pace, and learning needs. You review and change everything before your student sees it, and you decide how and when to use it.</p>
         </div>
         <a class="btn btn-sky" href="/">Back to home</a>
       </div>

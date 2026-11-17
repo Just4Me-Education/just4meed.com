@@ -10,7 +10,9 @@ just4meed.com is a public, read-only website. Visitors may:
 - follow links,
 - watch videos and other content we post.
 
-Everything else is blocked by default. The only code the site runs is its own small script file (`site.js`, for the "Copy" email buttons and podcast chapter buttons). The site does not accept forms or uploads, does not set cookies, and does not collect any visitor or student information. Just4Me's promise to families is privacy first, and the public website keeps that promise by collecting nothing.
+Everything else is blocked by default. The only code the site runs is its own small script file (`site.js`, for the "Copy" email buttons, podcast chapter buttons and click-to-play videos). The site does not accept forms or uploads, sets no cookies of its own, and runs no analytics. Fonts and images are served from this site, so opening a page sends nothing to Google or any other company.
+
+The one exception is YouTube. Each video shows a still image stored on this site, and the YouTube player loads only when the visitor presses play. From then on YouTube (Google) receives the visitor's IP address and browser details and may store cookies on their device. Like any host, GitHub Pages also sees visitors' IP addresses to serve the pages. The public explanation for families is the privacy notice at [/privacy/](privacy/index.html); keep it in step with this file.
 
 ## How the protection works
 
@@ -18,12 +20,12 @@ The site is served by GitHub Pages from the `main` branch of this repository. Gi
 
 | Allowed | From | Why |
 |---|---|---|
-| Page styles | this site (`styles.css`, `sample/styles.css`), Google Fonts | Layout and fonts |
-| Fonts | `fonts.gstatic.com` | Google Fonts files |
-| Images | this site, inline icons, `i.ytimg.com` | Our images and YouTube thumbnails |
+| Page styles | this site only (`styles.css`, `sample/styles.css`, `fonts/fonts.css`) | Layout and fonts |
+| Fonts | this site only (`fonts/`) | Atkinson Hyperlegible and Bricolage Grotesque, stored here so no visit is reported to Google |
+| Images | this site, inline icons | Our images, including the video still images |
 | Video and audio files | this site | Videos and podcast audio stored in this repo |
-| Embedded video players | `www.youtube-nocookie.com`, `www.youtube.com` | YouTube videos |
-| Scripts | this site's own files only (`site.js`) | Copy buttons and podcast chapters work; injected, inline and outside scripts are blocked |
+| Embedded video players | `www.youtube-nocookie.com` | YouTube videos, loaded only after the visitor presses play |
+| Scripts | this site's own files only (`site.js`) | Copy buttons, podcast chapters and click-to-play videos work; injected, inline and outside scripts are blocked |
 | Forms, plugins, background connections | **nothing** | Nothing to submit, nothing to leak |
 
 Anything not on that list is refused by the browser, even if someone manages to slip it into a page.
@@ -49,11 +51,25 @@ The automated check (`.github/workflows/security-check.yml`) runs on every chang
 
 ### YouTube video
 
-Use this template. Replace `VIDEO_ID` and the title:
+Videos use click-to-play, so nothing loads from YouTube until the visitor chooses to watch.
+
+1. Save the video's still image in `sample/img/videos/VIDEO_ID.jpg` (360 × 640 for a Short, 640 × 360 for a regular video). Download it once from `https://i.ytimg.com/vi/VIDEO_ID/oar2.jpg` (Shorts) or `hqdefault.jpg` (regular videos). Never link to `i.ytimg.com` from a page: that would tell Google about every visit.
+2. Use this template. Replace `VIDEO_ID` and the title in all three places:
+
+```html
+<div class="frame"><button type="button" class="yt-play" data-yt="VIDEO_ID" data-title="Video title"
+    aria-label="Play video: Video title (plays from YouTube)">
+  <img src="img/videos/VIDEO_ID.jpg" width="360" height="640" alt="" loading="lazy">
+  <span class="yt-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span>
+  <span class="yt-note" aria-hidden="true">Plays from YouTube</span>
+</button></div>
+```
+
+When the button is pressed, `site.js` swaps it for this player. If you ever need a player in the page itself, use exactly this:
 
 ```html
 <iframe
-  src="https://www.youtube-nocookie.com/embed/VIDEO_ID"
+  src="https://www.youtube-nocookie.com/embed/VIDEO_ID?rel=0"
   title="Describe the video for screen readers"
   width="560" height="315"
   loading="lazy"
@@ -63,9 +79,10 @@ Use this template. Replace `VIDEO_ID` and the title:
   allowfullscreen></iframe>
 ```
 
-- Use `youtube-nocookie.com`. It doesn't set tracking cookies until the visitor presses play, which fits our privacy promise.
+- Use `youtube-nocookie.com`. It cuts down tracking, but YouTube can still store data once a video plays, which is why the click-to-play image comes first.
 - Keep `referrerpolicy` as shown. YouTube refuses to play embeds that send no referrer.
 - The `sandbox` line lets the player work but stops it from redirecting our page.
+- In YouTube Studio, mark each video "Made for kids". That turns off personalized ads and comments on it.
 
 ### Video or other files stored in this repo
 

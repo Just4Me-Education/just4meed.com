@@ -1,0 +1,31 @@
+/* Fonts are stored on this site so that loading a page sends nothing to Google or any other company.
+   Latin characters only. Both families are under the SIL Open Font License (see the OFL-*.txt files here). */
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/atkinson-hyperlegible-400.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/atkinson-hyperlegible-400-italic.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/atkinson-hyperlegible-700.woff2) format('woff2');
+}
+/* One variable file covers weights 600 to 800 and the optical sizes. */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 600 800;
+  font-display: swap;
+  src: url(/fonts/bricolage-grotesque.woff2) format('woff2');
+}

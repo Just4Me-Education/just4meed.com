@@ -68,6 +68,7 @@ header .wrap { display: flex; align-items: center; justify-content: space-betwee
 .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--leaf); }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .note { font-size: 14px; color: var(--ink-soft); }
+.policy { max-width: 65ch; font-size: 18px; margin-bottom: 12px; }
 
 .sample { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 10px 30px -18px rgba(28,43,58,.35); min-width: 0; }
 .sample-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }

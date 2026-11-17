@@ -1,0 +1,88 @@
+name: Security check
+
+on:
+  pull_request:
+  push:
+  schedule:
+    - cron: "17 13 * * 1"   # Mondays, ~8am New York
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: security-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  security-check:
+    name: security-check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Check pages follow the security policy
+        run: python3 -I .github/scripts/check_site.py
+
+  browser-tests:
+    name: browser-tests (${{ matrix.browser }})
+    needs: security-check
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chrome, chromium]
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Install test tools
+        run: |
+          python3 -m pip install --quiet "playwright==1.*"
+          npm install --no-save --silent axe-core@4
+      - name: Find the browser
+        id: browser
+        run: |
+          if [ "${{ matrix.browser }}" = chrome ]; then
+            BIN=$(command -v google-chrome || command -v google-chrome-stable)
+          else
+            BIN=$(command -v chromium || command -v chromium-browser || ls /usr/local/share/chromium/chrome-linux/chrome 2>/dev/null || true)
+            if [ -z "$BIN" ]; then
+              python3 -m playwright install chromium
+              BIN=$(python3 -c "from playwright.sync_api import sync_playwright as s; p=s().start(); print(p.chromium.executable_path); p.stop()")
+            fi
+          fi
+          echo "Using $BIN: $("$BIN" --version)"
+          echo "bin=$BIN" >> "$GITHUB_OUTPUT"
+      - name: Run browser tests
+        run: python3 tests/browser_tests.py --browser "${{ steps.browser.outputs.bin }}" --name ${{ matrix.browser }} --axe node_modules/axe-core/axe.min.js
+      - name: Save screenshots and report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: browser-test-results-${{ matrix.browser }}
+          path: test-results/
+          retention-days: 14
+
+  live:
+    name: live-site
+    needs: security-check
+    # After a push to the branch the site is built from, on the weekly schedule, or when run by hand.
+    if: >-
+      github.event_name == 'schedule' ||
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'push' && github.ref_name == github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Wait for GitHub Pages to publish
+        if: github.event_name == 'push'
+        run: sleep 120
+      - name: Check the live site
+        run: python3 -I .github/scripts/check_site.py --live

@@ -1,0 +1,6 @@
+Contact: https://github.com/Just4Me-Education/just4meed.com/security/advisories/new
+Contact: mailto:memberservice@just4meed.com
+Expires: 2027-11-16T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://just4meed.com/.well-known/security.txt
+Policy: https://github.com/Just4Me-Education/just4meed.com/blob/HEAD/SECURITY.md

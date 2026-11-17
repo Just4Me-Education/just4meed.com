@@ -3,10 +3,12 @@
 
   python3 .github/scripts/check_site.py          # check the HTML files in this repo
   python3 .github/scripts/check_site.py --live   # also check the live site
+  python3 .github/scripts/check_site.py --fix    # update the ?v= stamps after editing a .css or .js file
 
 Exits non-zero if any check fails. Standard library only.
 """
 import datetime
+import hashlib
 import html.parser
 import pathlib
 import re
@@ -31,6 +33,33 @@ FORBIDDEN_VALUES = ["'unsafe-inline'", "'unsafe-eval'", "'unsafe-hashes'", "*", 
 DATA_OK_IN = {"img-src"}
 
 failures = []
+
+# Every link to one of the site's own stylesheets or scripts carries ?v=<fingerprint of the file>.
+# Browsers keep these files for 10 minutes; a new fingerprint makes them fetch the new version at once,
+# so a page never runs with an old site.js or styles.css after an update.
+ASSET_REF = re.compile(r'((?:href|src)=")(/[^"?#]+\.(?:css|js))(?:\?v=([0-9a-f]*))?(")')
+
+
+def fingerprint(rel_path):
+    f = ROOT / rel_path.lstrip("/")
+    return hashlib.sha256(f.read_bytes()).hexdigest()[:10] if f.is_file() else None
+
+
+def check_asset_versions(name, text, fix_path=None):
+    def repl(m):
+        want = fingerprint(m.group(2))
+        if want is None:
+            fail(name, f"links to {m.group(2)}, which doesn't exist")
+            return m.group(0)
+        if m.group(3) != want:
+            if fix_path:
+                return f"{m.group(1)}{m.group(2)}?v={want}{m.group(4)}"
+            fail(name, f"{m.group(2)} needs ?v={want} (run: python3 .github/scripts/check_site.py --fix)")
+        return m.group(0)
+    new = ASSET_REF.sub(repl, text)
+    if fix_path and new != text:
+        fix_path.write_text(new, encoding="utf-8")
+        print(f"updated stamps in {name}")
 
 
 def fail(where, msg):
@@ -199,6 +228,9 @@ def main():
     pages = sorted(p for p in ROOT.rglob("*.html")
                    if ".git" not in p.parts and ".github" not in p.parts and "node_modules" not in p.parts)
     index = ROOT / "index.html"
+    for p in pages:
+        check_asset_versions(str(p.relative_to(ROOT)), p.read_text(encoding="utf-8"),
+                             p if "--fix" in sys.argv else None)
     ref = check_html("index.html", index.read_text(encoding="utf-8"))
     for p in pages:
         if p != index:

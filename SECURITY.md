@@ -49,6 +49,10 @@ If the site ever adds sign-in, forms or payments, both gaps must be closed first
 
 The automated check (`.github/workflows/security-check.yml`) runs on every change and blocks anything that breaks these rules. It also opens the site in Chrome and Chromium (`tests/browser_tests.py`) to confirm visitors can still use every page and that injected code is blocked.
 
+### After editing a .css or .js file
+
+Run `python3 .github/scripts/check_site.py --fix`. It updates the `?v=` stamp on every link to that file. Browsers keep the site's styles and scripts for 10 minutes, and the new stamp makes them load the new version at once, so a page never runs with an old `site.js`. The check fails if a stamp is out of date.
+
 ### YouTube video
 
 Videos use click-to-play, so nothing loads from YouTube until the visitor chooses to watch.

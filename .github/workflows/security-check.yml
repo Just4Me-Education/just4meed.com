@@ -70,11 +70,11 @@ jobs:
   live:
     name: live-site
     needs: security-check
-    # After a push to the branch the site is built from, on the weekly schedule, or when run by hand.
+    # After a push to main (the branch GitHub Pages publishes), on the weekly schedule, or when run by hand.
     if: >-
       github.event_name == 'schedule' ||
       github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'push' && github.ref_name == github.event.repository.default_branch)
+      (github.event_name == 'push' && github.ref_name == 'main')
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

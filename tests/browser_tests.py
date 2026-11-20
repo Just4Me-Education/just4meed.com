@@ -149,7 +149,8 @@ def axe_scan(page, axe_path, g, name):
     check(g, name, not res, ", ".join(res))
 
 
-PAGES = [("home", "/"), ("sample", "/sample/"), ("privacy", "/privacy/")]
+PAGES = [("home", "/"), ("sample", "/sample/"), ("privacy", "/privacy/"), ("level-setting", "/level-setting/"),
+         ("reading-check", "/level-setting/reading/"), ("math-check", "/level-setting/math/")]
 
 
 def usability(browser, base, out, axe_path):
@@ -429,6 +430,72 @@ def security(browser, base):
     ctx.close()
 
 
+def run_check(page, kind, right):
+    """Answer a whole level check. right(state, item_info) decides whether to answer correctly."""
+    page.click('[data-act="toHandoff"]')
+    page.click('[data-act="handOver"]')
+    for _ in range(400):
+        st = page.evaluate("() => { const S = window.__levelCheck.state(); return {step: S.plan[S.step]}; }")
+        if st["step"] == "done":
+            return True
+        if page.locator('[data-act="doneReading"]').count():
+            page.click('[data-act="doneReading"]')
+        elif page.locator('[data-act="prNext"]').count():
+            page.click('[data-act="prNext"]')
+        elif page.locator('[data-act="submit"]').count():
+            if page.locator(".opt").count():
+                page.click('.opt[data-i="%d"]' % (0 if right() else 1))
+            else:
+                page.fill("#numIn", "1")
+            page.click('[data-act="submit"]')
+        else:
+            page.click('[data-act="next"]')
+    return False
+
+
+def level_checks(browser, base, out):
+    for kind in ("reading", "math"):
+        g = f"Level Setting ({kind} check)"
+        ctx = browser.new_context(viewport={"width": 1280, "height": 900}, accept_downloads=True)
+        page = ctx.new_page()
+        log = watch(page)
+        outside = []
+        page.on("request", lambda r: outside.append(r.url) if not r.url.startswith((base, "data:", "blob:")) else None)
+        page.goto(base + "/", wait_until="load")
+        page.click("text=Try the Level Setting checks")
+        page.wait_for_load_state("load")
+        check(g, "homepage button opens the Level Setting page", page.url.rstrip("/").endswith("/level-setting"), page.url)
+        page.click(f'a[href="/level-setting/{kind}/"]')
+        page.wait_for_load_state("load")
+        check(g, "check page opens and draws the setup", page.locator("#nickIn").is_visible())
+        page.fill("#nickIn", "Tester")
+        n = {"i": 0}
+        def right():
+            n["i"] += 1
+            return n["i"] % 3 != 0
+        check(g, "a student can answer the whole check", run_check(page, kind, right))
+        page.evaluate("window.__levelCheck.openGate()")
+        check(g, "results page shows", page.locator("text=Save these results now").is_visible())
+        with page.expect_download() as dl:
+            page.click('[data-act="download"]')
+        d = dl.value
+        path = out / d.suggested_filename
+        d.save_as(str(path))
+        html = path.read_text(encoding="utf-8")
+        check(g, "results download as one HTML file", d.suggested_filename.endswith(".html") and "Tester" in html and "<style>" in html,
+              d.suggested_filename)
+        page.click('[data-act="deleteAsk"]')
+        check(g, "delete asks for confirmation", page.locator("text=Delete everything?").is_visible())
+        page.click('[data-act="deleteYes"]')
+        check(g, "delete confirms everything is gone",
+              page.locator("text=All entered information and results have been deleted.").is_visible()
+              and page.evaluate("window.__levelCheck.state().log.length") == 0)
+        check(g, "no policy violations during the check", not log["csp"], "; ".join(log["csp"])[:300])
+        check(g, "no page errors", not log["errors"], "; ".join(log["errors"])[:300])
+        check(g, "nothing is sent to any other site", not outside, ", ".join(sorted(set(outside)))[:300])
+        ctx.close()
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--browser", required=True, help="path to the browser executable")
@@ -446,6 +513,7 @@ def main():
         print(f"Browser: {args.name} {version}")
         for fn in (lambda: usability(browser, base, out, args.axe),
                    lambda: sample_content(browser, base, out),
+                   lambda: level_checks(browser, base, out),
                    lambda: media(browser, base, out),
                    lambda: security(browser, base)):
             try:

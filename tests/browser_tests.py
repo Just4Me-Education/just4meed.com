@@ -496,6 +496,33 @@ def level_checks(browser, base, out):
         ctx.close()
 
 
+def phone_hold(browser, base, out):
+    """On a phone the parent presses and holds a real finger on "Grown-ups: hold".
+    Lifting the finger must not tap the button that is drawn in the same spot afterwards
+    (a beta tester on Android landed on the reviewer view instead of the results)."""
+    g = "Level Setting (phone press and hold)"
+    ctx = browser.new_context(viewport={"width": 412, "height": 915}, device_scale_factor=2.6,
+                              is_mobile=True, has_touch=True, accept_downloads=True)
+    page = ctx.new_page()
+    page.goto(base + "/level-setting/math/", wait_until="load")
+    page.fill("#nickIn", "Tester")
+    check(g, "a student can answer the whole check", run_check(page, "math", lambda: True))
+    box = page.locator("[data-hold]").bounding_box()
+    pt = {"x": box["x"] + box["width"] / 2, "y": box["y"] + box["height"] / 2}
+    cdp = ctx.new_cdp_session(page)
+    cdp.send("Input.dispatchTouchEvent", {"type": "touchStart", "touchPoints": [pt]})
+    page.wait_for_timeout(3200)
+    cdp.send("Input.dispatchTouchEvent", {"type": "touchEnd", "touchPoints": []})
+    page.wait_for_timeout(800)
+    check(g, "holding with a finger opens the results (not the reviewer view)",
+          page.locator("text=Save these results now").is_visible(), page.url)
+    with page.expect_download() as dl:
+        page.tap('[data-act="download"]')
+    check(g, "download button works on a phone", dl.value.suggested_filename.endswith(".html"), dl.value.suggested_filename)
+    page.screenshot(path=str(out / "level-phone-results.png"))
+    ctx.close()
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--browser", required=True, help="path to the browser executable")
@@ -514,6 +541,7 @@ def main():
         for fn in (lambda: usability(browser, base, out, args.axe),
                    lambda: sample_content(browser, base, out),
                    lambda: level_checks(browser, base, out),
+                   lambda: phone_hold(browser, base, out),
                    lambda: media(browser, base, out),
                    lambda: security(browser, base)):
             try:

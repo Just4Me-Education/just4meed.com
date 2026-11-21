@@ -695,7 +695,7 @@ function downloadFile() {
   var a = document.createElement("a");
   a.href = url; a.download = "just4me-" + (READING ? "reading" : "math") + "-results-" + name + "-" + stamp + ".html";
   document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+  setTimeout(function () { URL.revokeObjectURL(url); }, 120000); /* phones can take a while to confirm a download */
   S.downloaded = true;
   var m = $("#saveMsg"); if (m) m.textContent = "Downloaded. Check your Downloads folder.";
 }
@@ -828,9 +828,14 @@ document.addEventListener("click", function (e) {
 });
 
 /* Parent gate: press and hold for 2.5 seconds, so a student can't open the results by tapping. */
-var holdTimer = null;
-function holdStart(btn) { btn.classList.add("on"); clearTimeout(holdTimer); holdTimer = setTimeout(function () { btn.classList.remove("on"); openGate(); }, 2500); }
-function holdEnd() { clearTimeout(holdTimer); document.querySelectorAll(".hold.on").forEach(function (h) { h.classList.remove("on"); }); }
+var holdTimer = null, holdFired = false;
+function holdStart(btn) { btn.classList.add("on"); clearTimeout(holdTimer); holdTimer = setTimeout(function () { btn.classList.remove("on"); holdFired = true; openGate(); }, 2500); }
+function holdEnd() {
+  clearTimeout(holdTimer); document.querySelectorAll(".hold.on").forEach(function (h) { h.classList.remove("on"); });
+  /* Phones send a tap when the finger lifts. The screen has changed under the finger by then, so stop that tap from pressing whatever button is there now (on Android it opened the reviewer view instead of the results). */
+  if (holdFired) setTimeout(function () { holdFired = false; }, 600);
+}
+document.addEventListener("click", function (e) { if (holdFired) { e.preventDefault(); e.stopPropagation(); } }, true);
 document.addEventListener("pointerdown", function (e) { var h = e.target.closest("[data-hold]"); if (h) { e.preventDefault(); holdStart(h); } });
 ["pointerup", "pointercancel"].forEach(function (t) { document.addEventListener(t, holdEnd); });
 document.addEventListener("pointerout", function (e) { var h = e.target.closest && e.target.closest("[data-hold]"); if (h && !h.contains(e.relatedTarget)) holdEnd(); });

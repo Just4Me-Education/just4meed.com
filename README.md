@@ -5,6 +5,7 @@ Placeholder homepage for Just4Me Education, served by GitHub Pages at https://ju
 - `index.html`: the homepage (no forms, `noindex` for now).
 - `sample/`: sample content page (click-to-play videos, lesson PDFs, podcast demo).
 - `level-setting/`: Level Setting page for testers, with the Reading and Math level checks (`reading/`, `math/`). Questions are in `items-reading.js` and `items-math.js`; `check.js` runs both checks and keeps everything in the page's memory (nothing saved or sent). Results download as one HTML file or print to PDF.
+- `games/dig-site/`: Dig Site, an example learning game linked from the sample page. The parent picks grade (3-8), subject, topic and grid size; the student answers questions to earn digs and uncover fossils. Questions are in `questions.js` (Maryland, sample content); `dig.js` runs the game in the page's memory (nothing saved or sent).
 - `privacy/`: the privacy notice for families. Update it whenever the site starts using a new outside service.
 - `fonts/`: the site's fonts, stored here so pages load nothing from Google.
 - `CNAME`: tells GitHub Pages to serve this site at just4meed.com.

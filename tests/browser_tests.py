@@ -150,7 +150,11 @@ def axe_scan(page, axe_path, g, name):
 
 
 PAGES = [("home", "/"), ("sample", "/sample/"), ("privacy", "/privacy/"), ("level-setting", "/level-setting/"),
-         ("reading-check", "/level-setting/reading/"), ("math-check", "/level-setting/math/")]
+         ("reading-check", "/level-setting/reading/"), ("math-check", "/level-setting/math/"),
+         ("dig-site", "/games/dig-site/")]
+# The Dig Site game has its own dig-site colors.
+LIGHT_BG = {"dig-site": "rgb(233, 239, 233)"}
+DARK_BG = {"dig-site": "rgb(21, 25, 22)"}
 
 
 def usability(browser, base, out, axe_path):
@@ -165,7 +169,7 @@ def usability(browser, base, out, axe_path):
         check(g, "page loads", resp.status == 200, f"HTTP {resp.status}")
         check(g, "headline visible", page.locator("h1").first.is_visible())
         bg = page.evaluate("getComputedStyle(document.body).backgroundColor")
-        check(g, "page styles applied", bg == "rgb(251, 252, 248)", f"background is {bg}")
+        check(g, "page styles applied", bg == LIGHT_BG.get(label, "rgb(251, 252, 248)"), f"background is {bg}")
         page.evaluate("document.fonts.ready")
         page.wait_for_timeout(500)
         fonts = page.evaluate("""() => ({
@@ -232,7 +236,7 @@ def usability(browser, base, out, axe_path):
         page = ctx.new_page()
         page.goto(base + path, wait_until="load")
         bg = page.evaluate("getComputedStyle(document.body).backgroundColor")
-        check(g, "dark mode styles applied", bg == "rgb(18, 26, 33)", f"background is {bg}")
+        check(g, "dark mode styles applied", bg == DARK_BG.get(label, "rgb(18, 26, 33)"), f"background is {bg}")
         axe_scan(page, axe_path, g, "accessibility scan, dark mode (WCAG AA): no serious issues")
         page.screenshot(path=str(out / f"{label}-dark.png"))
         ctx.close()

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- Security policy: see SECURITY.md. Keep this as the first tag after charset so it applies to everything below it.
+     Every page must carry this same policy. To allow a new video or content source, see "Adding content" in SECURITY.md. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; media-src 'self'; frame-src https://www.youtube-nocookie.com; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; manifest-src 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Dig Site Game | Just4Me Education</title>
+<meta name="description" content="An example learning game: answer questions to earn digs and uncover fossils. The parent picks the grade, subject and grid size.">
+<link rel="stylesheet" href="/fonts/fonts.css?v=32585bd5e1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/games/dig-site/dig.css?v=7b038f67d3">
+</head>
+<body>
+<header class="sitehead">
+  <a class="brand" href="/" aria-label="Just4Me Education home">
+    <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="9" fill="#2c6fb7"/><path d="M8 16.5l4.5 4.5L22 10" fill="none" stroke="#f4b52c" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Just4Me Education
+  </a>
+  <a class="back" href="/sample/">Back to sample content</a>
+</header>
+<main>
+<div class="wrap">
+  <span class="mock">Example game · Maryland · sample questions · nothing is saved</span>
+
+  <div class="scene" aria-hidden="false">
+    <svg viewBox="0 0 1200 220" preserveAspectRatio="xMaxYMax slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--sky1)"/><stop offset="1" stop-color="var(--sky2)"/></linearGradient>
+      </defs>
+      <rect width="1200" height="220" fill="url(#sky)"/>
+      <circle cx="1080" cy="52" r="26" fill="var(--bone)" opacity=".9"/>
+      <path d="M0 150 Q160 100 330 135 T700 120 T1200 128 V220 H0Z" fill="var(--hill)"/>
+      <path d="M0 170 Q220 140 470 160 T1200 150 V220 H0Z" fill="var(--hill2)"/>
+      <!-- layered cliff -->
+      <g>
+        <path d="M640 220 L668 92 Q760 70 880 84 Q960 78 1010 96 L1046 220Z" fill="var(--st1)"/>
+        <path d="M662 120 Q770 104 880 112 Q960 108 1018 122 L1024 140 Q950 128 878 134 Q770 128 657 144Z" fill="var(--st2)"/>
+        <path d="M654 154 Q770 140 880 148 Q960 144 1027 158 L1032 174 Q950 162 878 168 Q770 162 650 186Z" fill="var(--st3)"/>
+        <path d="M646 196 Q770 178 880 186 Q960 182 1037 194 L1042 212 Q950 200 878 206 Q770 200 643 214Z" fill="var(--st4)"/>
+        <path d="M742 128 l10 -6 l4 8z M930 166 q8 -10 16 0 q-8 6 -16 0z M820 196 l12 -3 l-2 8z" fill="var(--bone)"/>
+        <circle cx="868" cy="160" r="6" fill="none" stroke="var(--bone)" stroke-width="2.5"/>
+      </g>
+      <!-- ground -->
+      <path d="M0 196 Q300 186 600 198 T1200 196 V220 H0Z" fill="var(--ground)"/>
+      <!-- tent -->
+      <g transform="translate(1062 128)">
+        <path d="M0 74 L54 0 L108 74Z" fill="var(--canvas)"/><path d="M54 0 L74 74 L34 74Z" fill="var(--canvas2)"/>
+        <path d="M54 0 v-22" stroke="var(--wood3)" stroke-width="3"/><path d="M54 -22 l26 7 l-26 7z" fill="var(--flag)"/>
+      </g>
+      <!-- sieve and bucket -->
+      <g transform="translate(560 168)">
+        <rect x="0" y="6" width="44" height="30" rx="4" fill="var(--flag)"/><path d="M4 6 q18 -18 36 0" fill="none" stroke="var(--wood3)" stroke-width="3"/>
+        <ellipse cx="96" cy="30" rx="34" ry="9" fill="var(--wood2)"/><ellipse cx="96" cy="27" rx="28" ry="6" fill="var(--twine)" opacity=".7"/>
+      </g>
+      <!-- shovel stuck in ground -->
+      <g transform="translate(500 92) rotate(12)">
+        <rect x="-3" y="0" width="6" height="84" rx="2" fill="var(--wood1)"/><rect x="-12" y="-6" width="24" height="8" rx="3" fill="var(--wood3)"/>
+        <path d="M-16 82 h32 v20 q-16 18 -32 0z" fill="#8c949a"/>
+      </g>
+      <!-- small grid stakes -->
+      <g stroke="var(--wood3)" stroke-width="4"><path d="M380 206 v-22 M460 208 v-22"/></g>
+      <path d="M380 188 L460 190" stroke="var(--twine)" stroke-width="2"/>
+    </svg>
+    <div class="title">
+      <h1>Dig Site</h1>
+      <p>Answer questions to earn digs, then uncover the fossils buried in the quarry.</p>
+    </div>
+  </div>
+
+  <!-- PARENT SETUP -->
+  <section class="panel" id="setupView" aria-labelledby="setupTitle">
+    <h2 id="setupTitle">Set up a dig site</h2>
+    <p class="note mt6">For parents. You choose what your student practices. Subjects and topics follow the Maryland standards for the grade you pick. There are no timers, no leaderboards and nothing to buy.</p>
+    <div class="setup">
+      <label for="grade">Grade
+        <select id="grade">
+          <option value="3">Grade 3</option><option value="4" selected>Grade 4</option><option value="5">Grade 5</option>
+          <option value="6">Grade 6</option><option value="7">Grade 7</option><option value="8">Grade 8</option>
+        </select>
+      </label>
+      <label for="subject">Subject <select id="subject"></select></label>
+      <label for="topic">Topic <select id="topic"></select></label>
+      <div class="lbl" role="group" aria-labelledby="sizeLbl"><span id="sizeLbl">Dig site size</span>
+        <div class="sizes" id="sizes"></div>
+        <small id="sizeNote"></small>
+      </div>
+      <div class="lbl" role="group" aria-label="Options"><span>Options</span>
+        <label class="check" for="optSkip"><input type="checkbox" id="optSkip" checked> Allow skipping questions</label>
+        <label class="check" for="optRetry"><input type="checkbox" id="optRetry" checked> Second try after a wrong answer</label>
+      </div>
+    </div>
+    <p class="note" id="subjNote"></p>
+    <div class="start"><button class="btn" type="button" id="startBtn">Start digging</button></div>
+  </section>
+
+  <!-- PLAY -->
+  <div id="playView" hidden>
+    <div class="wrap">
+      <div class="panel bar">
+        <span class="ctx" id="ctx"></span>
+        <button class="linkbtn" type="button" id="toSetup">Parent setup</button>
+      </div>
+      <div class="game">
+        <section class="panel" aria-label="Excavation grid">
+          <div class="stats">
+            <span class="digs zero" id="digPill">0 digs ready</span>
+            <span>Digs used <b id="sDigs">0</b></span>
+            <span>Fossils complete <b id="sFound">0</b> of <b id="sTotal">0</b></span>
+            <span>Pieces dug <b id="sPieces">0</b></span>
+          </div>
+          <div class="site">
+            <div class="cols" id="cols"></div>
+            <div class="rows" id="rows"></div>
+            <div class="pit"><div class="board" id="board" role="grid" aria-label="Excavation grid"></div></div>
+          </div>
+          <div class="toolbar" id="toolBar"></div>
+          <div class="legend" aria-hidden="true">
+            <span><i class="lg-soil"></i>Not dug</span>
+            <span><i class="lg-pit"></i>Empty</span>
+            <span><i class="lg-piece"></i>Piece of a bigger fossil</span>
+            <span><i class="lg-chips"></i>Chips: a fossil is right next to it</span>
+          </div>
+          <p class="hint" id="hint" aria-live="polite"></p>
+        </section>
+        <section class="panel nb" id="qPanel" aria-live="polite"></section>
+      </div>
+      <section class="panel" aria-label="Field notebook">
+        <p class="eyebrow">Field notebook</p>
+        <ol class="how">
+          <li>Pick a tool. The brush is an easier question worth 1 dig, the trowel is on level for 2 digs, and the shovel is a challenge for 3 digs.</li>
+          <li>Tap squares to dig. Columns are letters and rows are numbers, so B3 means column B, row 3.</li>
+          <li>Fossils are 2 to 5 squares long. Most are straight, but some bend into an L shape. Each square you dig shows just its piece; the fossil counts as complete once every piece is dug. Fossil chips in an empty square mean a fossil is in a square right beside it.</li>
+        </ol>
+        <div class="finds" id="finds"></div>
+      </section>
+    </div>
+  </div>
+</div>
+</main>
+<footer class="sitefoot">
+  <span>© 2026 Just4Me Education</span>
+  <span>Questions? Email <a href="mailto:memberservice@just4meed.com">memberservice@just4meed.com</a><button type="button" class="copy-email" data-email="memberservice@just4meed.com" aria-live="polite">Copy</button></span>
+  <span><a href="/privacy/">Privacy</a> · just4meed.com</span>
+</footer>
+<script src="/site.js?v=7823a01251" defer></script>
+<script src="/games/dig-site/questions.js?v=0650c1ae7f"></script>
+<script src="/games/dig-site/dig.js?v=590704b402"></script>
+</body>
+</html>

@@ -406,16 +406,16 @@ fromList("ss",[5],2,"gov",AMEND,function(r){return {q:"What does the "+r[0]+" Am
 fromList("ss",[5],3,"gov",AMEND.map(function(r){return [r[1],r[0]+" Amendment"];}),function(r){return {q:"Which amendment says this? "+r[0]+".",why:"That is the "+r[1]+"."};});
 var CIVF=[["How many senators does each state have?","2","Every state has 2 senators, no matter its population.",["1","4","10"]],["How many years is a President's term?","4","A President is elected for a 4-year term.",["2","6","8"]],["How many years is a U.S. senator's term?","6","Senators serve 6-year terms.",["2","4","8"]],["How many years is a term in the House of Representatives?","2","Representatives are elected every 2 years.",["4","6","1"]],["How many justices serve on the Supreme Court?","9","There are 9 justices, including the Chief Justice.",["7","12","5"]],["How many voting members are in the House of Representatives?","435","The House has 435 voting members, divided among the states by population.",["100","50","538"]],["What is the minimum age to be President?","35","The Constitution says a President must be at least 35.",["25","30","40"]],["What is the minimum age to be a U.S. senator?","30","Senators must be at least 30 years old.",["25","35","21"]],["What is the minimum age to serve in the House of Representatives?","25","Representatives must be at least 25 years old.",["18","21","30"]],["Who is commander in chief of the armed forces?","The President","The Constitution makes the President commander in chief.",["The Speaker of the House","The Chief Justice","The Secretary of State"]],["Which part of Congress approves treaties?","The Senate","Treaties need approval from two-thirds of the Senate.",["The House of Representatives","The Supreme Court","The Cabinet"]],["Who has the power to declare war?","Congress","The Constitution gives Congress the power to declare war.",["The President alone","The Supreme Court","The states"]],["What can the President do to reject a bill passed by Congress?","Veto it","A veto sends the bill back to Congress.",["Rewrite it","Sell it","Ignore it forever"]],["How can Congress pass a law after a veto?","Two-thirds of both houses vote to override","An override needs two-thirds in both the House and Senate.",["The President signs it again","The Supreme Court votes","Half of the states agree"]],["Who nominates Supreme Court justices?","The President","The President nominates justices, and the Senate confirms them.",["The House","The states","The voters directly"]],["Which branch can decide that a law goes against the Constitution?","The judicial branch","Courts can rule that a law is unconstitutional.",["The executive branch","The legislative branch","The Cabinet"]],["Where does the U.S. Congress meet?","The Capitol in Washington, D.C.","Congress meets in the U.S. Capitol.",["The White House","The Supreme Court Building","Annapolis"]],["What is the opening of the Constitution called?","The Preamble","The Preamble begins \"We the People.\"",["The Bill of Rights","The Amendment","The Declaration"]],["What are the first three words of the Constitution?","We the People","The Preamble starts with \"We the People of the United States.\"",["Four score and","When in the","I pledge allegiance"]],["Where is Maryland's State House, the oldest still used by a legislature in the U.S.?","Annapolis","The Maryland State House in Annapolis has been in use since the 1770s.",["Baltimore","Frederick","Rockville"]]];
 CIVF.forEach(function(r,i){B.push({s:"ss",g:[5],lv:i%3+1,t:"gov",q:r[0],a:r[1],w:r[3],why:r[2]});});
-var EV5=[[1787,"the writing of the Constitution","gov"],[1791,"the ratification of the Bill of Rights","gov"],[1803,"the Louisiana Purchase","nat"],[1814,"the Battle of Baltimore and the writing of \"The Star-Spangled Banner\"","nat"],[1827,"the chartering of the B&O Railroad","nat"],[1838,"Frederick Douglass's escape from slavery","nat"],[1844,"the first telegraph message from Washington to Baltimore","nat"],[1849,"Harriet Tubman's escape from slavery","nat"],[1861,"the start of the Civil War","nat"],[1862,"the Battle of Antietam","nat"],[1864,"Maryland ending slavery in its new state constitution","nat"],[1865,"the end of the Civil War","nat"],[1920,"the 19th Amendment","cur"],[1929,"the start of the Great Depression","cur"],[1941,"the United States entering World War II","cur"],[1954,"Brown v. Board of Education","cur"],[1964,"the Civil Rights Act","cur"],[1967,"Thurgood Marshall joining the Supreme Court","cur"],[1969,"the first Moon landing","cur"]];
+var EV5=[[1787,"the writing of the Constitution","gov"],[1791,"the ratification of the Bill of Rights","gov"],[1803,"the Louisiana Purchase","nat"],[1814,"the Battle of Baltimore","nat"],[1827,"the chartering of the B&O Railroad","nat"],[1838,"Frederick Douglass's escape from slavery","nat"],[1844,"the first telegraph message from Washington to Baltimore","nat"],[1849,"Harriet Tubman's escape from slavery","nat"],[1861,"the start of the Civil War","nat"],[1862,"the Battle of Antietam","nat"],[1864,"Maryland ending slavery in its new state constitution","nat"],[1865,"the end of the Civil War","nat"],[1920,"the 19th Amendment","cur"],[1929,"the start of the Great Depression","cur"],[1941,"the United States entering World War II","cur"],[1954,"Brown v. Board of Education","cur"],[1964,"the Civil Rights Act","cur"],[1967,"Thurgood Marshall joining the Supreme Court","cur"],[1969,"the first Moon landing","cur"]];
 timeline([5],function(f,s){return s[2];},EV5);
 
 /* Grades 6-7: world geography */
-var CONT=[["Kenya","Africa"],["Nigeria","Africa"],["Egypt","Africa"],["Ghana","Africa"],["Ethiopia","Africa"],["Morocco","Africa"],["South Africa","Africa"],["Tanzania","Africa"],["Japan","Asia"],["China","Asia"],["India","Asia"],["Vietnam","Asia"],["Thailand","Asia"],["South Korea","Asia"],["Pakistan","Asia"],["Saudi Arabia","Asia"],["Nepal","Asia"],["Philippines","Asia"],["France","Europe"],["Germany","Europe"],["Italy","Europe"],["Spain","Europe"],["Poland","Europe"],["Norway","Europe"],["Greece","Europe"],["Portugal","Europe"],["Ireland","Europe"],["Sweden","Europe"],["Brazil","South America"],["Argentina","South America"],["Peru","South America"],["Chile","South America"],["Colombia","South America"],["Venezuela","South America"],["Ecuador","South America"],["Canada","North America"],["Mexico","North America"],["Cuba","North America"],["Guatemala","North America"],["Jamaica","North America"],["New Zealand","Oceania (Australia and the Pacific)"],["Fiji","Oceania (Australia and the Pacific)"]];
+var CONT=[["Kenya","Africa"],["Nigeria","Africa"],["Egypt","Africa"],["Ghana","Africa"],["Ethiopia","Africa"],["Morocco","Africa"],["South Africa","Africa"],["Tanzania","Africa"],["Japan","Asia"],["China","Asia"],["India","Asia"],["Vietnam","Asia"],["Thailand","Asia"],["South Korea","Asia"],["Pakistan","Asia"],["Saudi Arabia","Asia"],["Nepal","Asia"],["Philippines","Asia"],["France","Europe"],["Germany","Europe"],["Italy","Europe"],["Spain","Europe"],["Poland","Europe"],["Norway","Europe"],["Greece","Europe"],["Portugal","Europe"],["Ireland","Europe"],["Sweden","Europe"],["Brazil","South America"],["Argentina","South America"],["Peru","South America"],["Chile","South America"],["Colombia","South America"],["Venezuela","South America"],["Ecuador","South America"],["Canada","North America"],["Mexico","North America"],["Cuba","North America"],["Guatemala","North America"],["Jamaica","North America"],["New Zealand","Oceania"],["Fiji","Oceania"]];
 fromList("ss",[6,7],1,"plc",CONT,function(r){return {q:"On which continent or region is "+r[0]+"?",why:r[0]+" is in "+r[1]+"."};});
 var CAP=[["France","Paris"],["Japan","Tokyo"],["Kenya","Nairobi"],["Brazil","Brasília"],["Canada","Ottawa"],["Australia","Canberra"],["Egypt","Cairo"],["India","New Delhi"],["China","Beijing"],["Mexico","Mexico City"],["Peru","Lima"],["Argentina","Buenos Aires"],["Nigeria","Abuja"],["Germany","Berlin"],["Italy","Rome"],["Spain","Madrid"],["United Kingdom","London"],["Russia","Moscow"],["South Korea","Seoul"],["Thailand","Bangkok"],["Vietnam","Hanoi"],["Saudi Arabia","Riyadh"],["Turkey","Ankara"],["Greece","Athens"],["Norway","Oslo"],["Sweden","Stockholm"],["Poland","Warsaw"],["Ghana","Accra"],["Ethiopia","Addis Ababa"],["Chile","Santiago"],["Colombia","Bogotá"],["Cuba","Havana"],["Philippines","Manila"],["Pakistan","Islamabad"],["New Zealand","Wellington"],["Ireland","Dublin"],["Portugal","Lisbon"],["Morocco","Rabat"]];
 fromList("ss",[6,7],2,"plc",CAP,function(r){return {q:"What is the capital city of "+r[0]+"?",why:r[1]+" is the capital of "+r[0]+"."};});
-var LAND=[["The Nile River","Africa"],["The Amazon River","South America"],["The Yangtze River","Asia"],["The Mississippi River","North America"],["The Danube River","Europe"],["The Ganges River","Asia"],["The Himalaya Mountains","Asia"],["The Andes Mountains","South America"],["The Alps","Europe"],["The Rocky Mountains","North America"],["The Sahara Desert","Africa"],["The Gobi Desert","Asia"],["Mount Kilimanjaro","Africa"],["The Atacama Desert","South America"],["The Ural Mountains","Europe and Asia (they divide them)"]];
-fromList("ss",[6,7],2,"geo",LAND,function(r){return {q:"Where is "+r[0].charAt(0).toLowerCase()+r[0].slice(1)+"?",why:r[0]+" is in "+r[1]+"."};},["Africa","Asia","Europe","North America","South America"]);
+var LAND=[["The Nile River","Africa"],["The Amazon River","South America"],["The Yangtze River","Asia"],["The Mississippi River","North America"],["The Danube River","Europe"],["The Ganges River","Asia"],["The Himalaya Mountains","Asia"],["The Andes Mountains","South America"],["The Alps","Europe"],["The Rocky Mountains","North America"],["The Sahara Desert","Africa"],["The Gobi Desert","Asia"],["Mount Kilimanjaro","Africa"],["The Atacama Desert","South America"],["The Ural Mountains","On the border of Europe and Asia"]];
+fromList("ss",[6,7],2,"geo",LAND,function(r){var pl=/s$/.test(r[0]);return {q:"Where "+(pl?"are ":"is ")+r[0].charAt(0).toLowerCase()+r[0].slice(1)+"?",why:r[0]+(pl?" are":" is")+(/^On /.test(r[1])?" o"+r[1].slice(1):" in "+r[1])+"."};},["Africa","Asia","Europe","North America","South America"]);
 var HEMI=[["Sydney, Australia","Southern"],["Buenos Aires, Argentina","Southern"],["Cape Town, South Africa","Southern"],["Lima, Peru","Southern"],["Rio de Janeiro, Brazil","Southern"],["Jakarta, Indonesia","Southern"],["Auckland, New Zealand","Southern"],["Santiago, Chile","Southern"],["London, England","Northern"],["Tokyo, Japan","Northern"],["Cairo, Egypt","Northern"],["Mexico City, Mexico","Northern"],["Baltimore, Maryland","Northern"],["Moscow, Russia","Northern"],["Beijing, China","Northern"],["Mumbai, India","Northern"],["Toronto, Canada","Northern"],["Lagos, Nigeria","Northern"]];
 fromList("ss",[6,7],1,"geo",HEMI,function(r){return {q:"Is "+r[0]+" in the Northern or Southern Hemisphere?",why:r[0]+" is "+(r[1]==="Northern"?"north":"south")+" of the Equator, in the "+r[1]+" Hemisphere."};},["Northern","Southern","Neither, it is on the Equator","Both"]);
 gen("ss",[6,7],3,"geo",function(){var sc=[10,20,25,50,100,200][ri(0,5)],d=ri(2,9)+(Math.random()<.4?0.5:0),ans=Math.round(sc*d*10)/10;
@@ -526,6 +526,228 @@ gen("ela",[6,7,8],2,"lang",function(){var ws=WORDS.slice().sort(),i=ri(0,ws.leng
   var out=shuffle(ws.filter(function(x){return x<g1||x>g2;})).slice(0,3);return {q:"A dictionary page has the guide words \""+g1+"\" and \""+g2+"\". Which word would be on that page?",a:inside,w:out,why:"Words on the page fall in ABC order between the guide words. \""+inside+"\" fits between \""+g1+"\" and \""+g2+"\"."};});
 gen("ela",[6,7,8],3,"lang",function(){var ws=shuffle(WORDS.slice()).slice(0,5),sorted=ws.slice().sort(),ans=sorted[2];return {q:"Put these words in ABC order: "+ws.join(", ")+". Which word is in the middle?",a:ans,w:ws.filter(function(x){return x!==ans;}).slice(0,3),why:"In ABC order: "+sorted.join(", ")+"."};});
 
+
+/* ---------- more kinds of health and environmental literacy questions (added 2026-11-23 so no single kind repeats too often) ---------- */
+/* Health 3-5: feelings */
+var FEEL=[["Your friend moved away and you miss them.","Sad",["Excited","Proud","Bored"]],["You get to visit the zoo tomorrow.","Excited",["Sad","Angry","Embarrassed"]],["Someone took your turn in line on purpose.","Angry",["Proud","Thankful","Excited"]],["You have to give a talk in front of the class.","Nervous",["Bored","Thankful","Angry"]],["You finished a hard puzzle all by yourself.","Proud",["Scared","Sad","Embarrassed"]],["You heard a loud crash in the dark.","Scared",["Proud","Bored","Thankful"]],["You tripped and spilled your lunch in the cafeteria.","Embarrassed",["Proud","Excited","Thankful"]],["You have to wait a long time with nothing to do.","Bored",["Proud","Scared","Thankful"]],["A classmate shared their snack with you.","Thankful",["Angry","Scared","Bored"]]];
+FEEL.forEach(function(r){B.push({s:"health",g:G35,lv:1,t:"men",q:"Which feeling word fits best? "+r[0],a:r[1],w:r[2],why:"Most people would feel "+r[1].toLowerCase()+" here. Naming a feeling is the first step in handling it."});});
+/* Health 3-5: I-messages and solving conflicts */
+add("health",[
+ [G35,2,"men","Which of these is an \"I-message\"?","I feel upset when you take my markers without asking.","You always ruin everything!","Give those back right now.","Whatever. I don't care.","An I-message names your feeling and what caused it, without blaming."],
+ [G35,2,"men","Two friends both want the same swing. What is a fair way to solve it?","Take turns, using a timer","Push the other person off","Tell the teacher the other person is mean","Never play on the swings again","Taking turns lets both people get what they want."],
+ [G35,3,"men","A friend is teasing you and it's starting to hurt. What is a good first step?","Calmly tell them to stop and how it makes you feel","Tease them back even harder","Keep it a secret forever","Break something of theirs","Speaking up calmly is a good first step. If it keeps happening, tell a trusted adult."],
+ [G35,2,"men","What does it mean to be a good listener?","Look at the speaker and let them finish","Talk over them with your own story","Look at your phone while they talk","Change the subject right away","Good listeners pay attention and let the other person finish."],
+ [G35,3,"men","Which choice shows empathy?","Asking a new student to sit with you because they look lonely","Laughing when someone drops their books","Ignoring a friend who is crying","Telling someone their feelings are silly","Empathy means understanding how someone else feels and caring about it."],
+ [G35,1,"men","Which is a healthy way to calm down when you feel angry?","Count slowly to ten","Slam the door","Yell at someone","Throw your things","Counting slowly gives your body time to calm down."]
+]);
+/* Health 3-5: germs and hygiene */
+add("health",[
+ [G35,1,"dis","How long should you scrub your hands with soap when you wash them?","At least 20 seconds","1 second","5 minutes","You don't need to scrub","The CDC says to scrub for at least 20 seconds, about as long as humming \"Happy Birthday\" twice."],
+ [G35,1,"dis","What is the best way to cover a cough or sneeze if you don't have a tissue?","Into your elbow","Into your hands","Toward a friend","Don't cover it","Coughing into your elbow keeps germs off your hands."],
+ [G35,2,"dis","Why shouldn't you share a water bottle with a friend who has a cold?","Germs can spread through saliva","Water makes colds worse","Bottles make you sick by themselves","Colds only spread through food","Cold viruses spread through saliva and droplets."],
+ [G35,2,"dis","When is it most important to wash your hands?","Before eating and after using the bathroom","Only once a week","Only after taking a bath","Only when they look dirty","Washing before eating and after the bathroom stops many germs from spreading."],
+ [G35,2,"dis","How do vaccines help protect you?","They teach your body to fight certain germs","They clean your teeth","They make you taller","They cure a broken bone","Vaccines train your immune system to recognize certain germs."],
+ [G35,1,"dis","How often should you brush your teeth?","Twice a day","Once a month","Only when they hurt","Once a week","Dentists recommend brushing twice a day for two minutes."],
+ [G35,3,"dis","Why is it a good idea to stay home from school when you have a fever?","So you can rest and don't spread germs to others","So you can play video games","Because fevers spread through the air like smoke","Because schools close when anyone is sick","Resting helps you heal, and staying home protects classmates."]
+]);
+/* Health 3-5: emergencies */
+var EMERG=[["A grown-up has fallen and won't wake up","Call 911"],["You smell smoke and see flames in the kitchen","Call 911"],["Someone is choking and can't breathe or talk","Call 911"],["You twisted your ankle at recess and it hurts to walk","Tell a trusted adult"],["Your friend's cat is stuck in a tree","Tell a trusted adult"],["You lost your library book","Tell a trusted adult"],["A stranger online asks for your home address","Tell a trusted adult"],["You feel a little sick to your stomach at school","Tell a trusted adult"]];
+fromList("health",G35,function(r){return r[1]==="Call 911"?1:2;},"saf",EMERG,function(r){return {q:"What should you do? "+r[0]+".",why:r[1]==="Call 911"?"This is an emergency: someone's life or safety is in danger right now.":"This isn't an emergency, but a trusted adult can help."};},["Call 911","Tell a trusted adult","Ignore it","Post about it online"]);
+/* Health 3-5: walking, biking and water safety */
+add("health",[
+ [G35,2,"saf","If there is no sidewalk, which way should you walk along a road?","Facing traffic, on the left side","With your back to traffic","In the middle of the road","It doesn't matter","Facing traffic lets you see cars coming toward you."],
+ [G35,2,"saf","When riding a bike on the road, which way should you ride?","With traffic, on the right side","Against traffic","Down the middle line","On the left side facing cars","Bikes follow the same direction as cars."],
+ [G35,1,"saf","How should a bike helmet fit?","Snug and level, covering your forehead","Tipped back on your head","Loose so it can wiggle","Unbuckled","A helmet protects best when it's snug, level and buckled."],
+ [G35,1,"saf","Before you cross a street, what should you do?","Stop and look left, right and left again","Run across quickly","Look only at your phone","Close your eyes and listen","Looking both ways, then left again, helps you spot cars."],
+ [G35,2,"saf","What should you wear on a boat or kayak?","A life jacket that fits","A heavy coat","Nothing extra if you can swim","Rain boots","A life jacket keeps you afloat even if you are a strong swimmer."],
+ [G35,3,"saf","Lightning is flashing and you are at the pool. What should you do?","Get out of the water and go indoors","Keep swimming","Stand under a tall tree","Hold a metal pole","Water and open areas are dangerous in lightning. Go inside right away."]
+]);
+/* Health 3-5: nutrients */
+var NUTR=[["Eggs","Protein"],["Chicken","Protein"],["Fish","Protein"],["Bread","Carbohydrates"],["Rice","Carbohydrates"],["Pasta","Carbohydrates"],["Butter","Fat"],["Olive oil","Fat"],["Oranges","Vitamin C"],["Strawberries","Vitamin C"]];
+fromList("health",G35,2,"nut",NUTR,function(r){var pl=/s$/.test(r[0]);return {q:"Which nutrient "+(pl?"are ":"is ")+r[0].toLowerCase()+" best known for?",why:r[0]+(pl?" are":" is")+" a good source of "+(r[1]==="Vitamin C"?"vitamin C":r[1].toLowerCase())+"."};},["Protein","Carbohydrates","Fat","Vitamin C"]);
+add("health",[
+ [G35,1,"nut","Which nutrient helps build strong bones and teeth?","Calcium","Sugar","Salt","Caffeine","Calcium, found in milk, yogurt and leafy greens, builds bones and teeth."],
+ [G35,2,"nut","Which drink is the healthiest choice with lunch most days?","Water","Soda","Energy drink","Sweet tea","Water has no added sugar and keeps you hydrated."],
+ [G35,2,"nut","Which snack has the most fiber?","An apple with the skin","A candy bar","A cup of juice","A bag of cheese puffs","The skin of fruit has lots of fiber."],
+ [G35,3,"nut","Why is breakfast important for students?","It gives your brain and body energy for the morning","It makes you sleepy","It replaces lunch","It is only important on weekends","Breakfast refuels you after a night without food."]
+]);
+/* Environmental literacy: the water cycle */
+var WCYC=[["Puddles dry up on a sunny day","Evaporation"],["Water vapor cools and forms clouds","Condensation"],["Rain falls on the Chesapeake Bay","Precipitation"],["Snow falls in western Maryland","Precipitation"],["Dew forms on grass in the morning","Condensation"],["Water flows downhill into a stream","Runoff"],["Rainwater soaks into the soil","Infiltration"],["Plants give off water vapor from their leaves","Transpiration"]];
+fromList("env",ALLG,function(r){return r[1]==="Transpiration"||r[1]==="Infiltration"?3:2;},"s2",WCYC,function(r){return {q:"Which part of the water cycle is this? "+r[0]+".",why:"This is "+r[1].toLowerCase()+"."};});
+/* where does it go */
+var SORT=[["A banana peel","Compost"],["Apple cores and vegetable scraps","Compost"],["An empty aluminum soda can","Recycling"],["A clean glass jar","Recycling"],["Old newspapers","Recycling"],["A clean cardboard box","Recycling"],["A used chip bag","Trash"],["A used tissue","Trash"],["Used motor oil","Hazardous waste drop-off"],["Leftover pesticide","Hazardous waste drop-off"]];
+fromList("env",ALLG,function(r){return r[1]==="Hazardous waste drop-off"?3:1;},"s5",SORT,function(r){return {q:"Where should this usually go? "+r[0]+".",why:r[1]==="Compost"?"Food scraps break down into rich soil in compost.":r[1]==="Recycling"?"It can be made into new products.":r[1]==="Trash"?"It can't be recycled or composted in most places.":"It can poison water and soil, so it needs a special drop-off. Rules vary by county."};});
+/* habitats */
+add("env",[
+ [ALLG,1,"s2","In Maryland, where do blue crabs mainly live?","In the Chesapeake Bay","In cold mountain streams","In western Maryland forests","In sand dunes","Blue crabs live in the bay's salty and brackish water."],
+ [ALLG,2,"s2","In Maryland, where do brook trout mainly live?","In cold, clean mountain streams","In the salty lower bay","In sand dunes","In warm farm ponds","Brook trout need cold, clean, oxygen-rich water."],
+ [ALLG,2,"s2","In Maryland, where do diamondback terrapins mainly live?","In salt marshes and along bay shorelines","In cold mountain streams","In mountain forests","In caves","Terrapins live in brackish marshes and lay eggs on sandy shores."],
+ [ALLG,1,"s2","Where do Maryland's wild horses live?","On Assateague Island's beaches and marshes","In western Maryland caves","In the middle of Baltimore","On mountaintops","Wild horses have lived on the barrier island of Assateague for hundreds of years."],
+ [ALLG,2,"s2","In Maryland, where do most black bears live?","In the forests of western Maryland","In salt marshes","On Assateague Island's beaches","In the open bay","Most of Maryland's black bears live in the western mountains."],
+ [ALLG,2,"s2","Where do oysters live in Maryland?","On reefs at the bottom of the Chesapeake Bay","In cold mountain streams","On the forest floor","In sand dunes","Oysters grow on hard reefs on the bay bottom."]
+]);
+/* natural resources */
+var RES=[["Paper","Trees"],["A wooden chair","Trees"],["Glass","Sand"],["A plastic bottle","Oil (petroleum)"],["Gasoline","Oil (petroleum)"],["A cotton T-shirt","Cotton plants"],["An aluminum can","Bauxite ore"],["A brick","Clay"]];
+fromList("env",ALLG,function(r){return r[1]==="Bauxite ore"||r[1]==="Sand"?3:r[1]==="Trees"?1:2;},"s2",RES,function(r){return {q:"Which natural resource is "+r[0].charAt(0).toLowerCase()+r[0].slice(1)+" mostly made from?",why:r[0]+" is made mostly from "+r[1].toLowerCase()+"."};});
+/* investigation tools */
+var TOOL=[["Air temperature","Thermometer"],["How much rain fell","Rain gauge"],["Wind speed","Anemometer"],["How clear the water is","Secchi disk"],["Air pressure","Barometer"],["Which way the wind blows","Wind vane"]];
+fromList("env",G35,function(r){return r[1]==="Secchi disk"||r[1]==="Barometer"?3:1;},"s1",TOOL,function(r){return {q:"Which tool would a scientist use to measure "+r[0].charAt(0).toLowerCase()+r[0].slice(1)+"?",why:"A "+r[1].toLowerCase()+" measures "+r[0].charAt(0).toLowerCase()+r[0].slice(1)+"."};});
+add("env",[
+ [G35,2,"s1","Students want to know if shade changes stream temperature. What should they measure?","Water temperature in sunny and shady spots","The color of the rocks","How many students came","The time of day only","They compare the temperature in both kinds of spots."],
+ [G35,3,"s1","In a test of whether fertilizer helps plants grow, what should stay the same for every plant?","Water, light and soil","The amount of fertilizer","Nothing has to stay the same","Only the pot color","A fair test changes just one thing, the fertilizer, and keeps everything else the same."],
+ [G68,2,"s1","Why do scientists take water samples at the same spots every month?","To compare changes over time fairly","To use up extra bottles","Because the water never changes","To make the data look bigger","Sampling the same places lets you compare changes over time."],
+ [G68,3,"s1","A Secchi disk disappears at 0.5 m in one creek and 1.5 m in another. Which creek is clearer?","The one where it disappears at 1.5 m","The one where it disappears at 0.5 m","They are equally clear","You can't tell","The deeper you can see the disk, the clearer the water."],
+ [G68,2,"s1","What does low dissolved oxygen in a river usually mean for fish?","It is harder for fish to breathe and survive","Fish grow faster","Nothing changes for fish","Fish need less food","Fish take oxygen from water, so low oxygen stresses or kills them."]
+]);
+/* solutions */
+var FIX=[["Restoring oyster reefs","Filters water and gives fish a habitat"],["Planting a forest buffer along a stream","Shades the water and traps soil and fertilizer"],["Building a living shoreline","Uses marsh plants to slow erosion"],["A rain barrel","Collects roof water to use later"],["Planting cover crops on farm fields","Hold soil in place over the winter"]];
+fromList("env",ALLG,function(r){return /living|cover/.test(r[0])?3:2;},"s5",FIX,function(r){return {q:"How does this help the environment? "+r[0]+".",why:r[0]+": "+r[1].charAt(0).toLowerCase()+r[1].slice(1)+"."};});
+/* 6-8: point vs nonpoint pollution */
+var POINT=[["Wastewater flowing out of a factory pipe","Point source"],["Discharge from a sewage treatment plant","Point source"],["A leaking oil tank at one gas station","Point source"],["Fertilizer washing off many lawns after rain","Nonpoint source"],["Oil and grime washing off roads in a storm","Nonpoint source"],["Soil washing off farm fields","Nonpoint source"],["Pet waste washing into storm drains across a town","Nonpoint source"]];
+fromList("env",G68,2,"s3",POINT,function(r){return {q:"Is this point-source or nonpoint-source pollution? "+r[0]+".",why:r[1]==="Point source"?"It comes from one place you can point to.":"It comes from many spread-out places, so it's hard to trace to one spot."};},["Point source","Nonpoint source","Not pollution","Natural only"]);
+/* 6-8: weather or climate */
+var WC=[["It is raining in Baltimore this afternoon","Weather"],["A storm will bring snow tonight","Weather"],["Today's high temperature was 88°F","Weather"],["Maryland summers are usually hot and humid","Climate"],["Average yearly rainfall in Maryland is about 40 to 45 inches","Climate"],["Over 50 years, spring has been coming earlier","Climate"]];
+fromList("env",G68,2,"s4",WC,function(r){return {q:"Is this about weather or climate? "+r[0]+".",why:r[1]==="Weather"?"Weather is the condition of the air over hours or days.":"Climate is the usual pattern over many years."};},["Weather","Climate","Both","Neither"]);
+/* 6-8: environment and health */
+add("env",[
+ [G68,2,"s4","On very hot, sunny days, ground-level ozone can build up. Who is most at risk?","People with asthma","People who drink water","People who wear hats","Nobody is affected","Ozone irritates the lungs, especially for people with asthma."],
+ [G68,3,"s4","Warmer winters let more ticks survive. Which health problem could increase?","Lyme disease","Broken bones","Sunburn in winter","Food allergies","Deer ticks spread Lyme disease."],
+ [G68,2,"s4","Why are swimmers told to stay out of water with a harmful algal bloom?","Some algae make toxins that can make people and pets sick","Algae make water too cold","Algae bite","The water becomes salty","Some blooms release toxins harmful to people and animals."],
+ [G68,3,"s4","Sea level rise is causing more \"sunny day\" flooding in Annapolis. What is one effect on people?","Flooded streets and damaged buildings","More snow","Cooler summers","Fewer storms","High tides now flood low streets even without rain."],
+ [G68,2,"s4","How can trees in a city help people's health on hot days?","Their shade lowers temperatures","They make the air hotter","They block all rain","They attract lightning","Shade and evaporating water from leaves cool the area."]
+]);
+
+/* better wrong answers for questions whose right answer was much longer than the others (a giveaway) */
+var BETTER_W={
+"What was the Columbian Exchange?": [
+"A trade deal between Spain and Portugal that split the Americas in two",
+"A bank in Spain that paid for Columbus's voyages to the Americas",
+"A market in colonial Annapolis where tobacco was traded for goods"
+],
+"In a market economy, who mostly decides what goods are made?": [
+"The government, through a plan written every few years",
+"A king or queen, who chooses what each worker makes",
+"One large company that controls all the stores"
+],
+"What did the Great Compromise of 1787 create?": [
+"A one-house Congress where every state had the same number of votes",
+"A president chosen by Congress for a single six-year term",
+"A national court system with judges elected by the people"
+],
+"Why did Anti-Federalists demand a Bill of Rights?": [
+"They wanted the President to have more power over the states",
+"They wanted to bring back the Articles of Confederation unchanged",
+"They wanted the national government to collect more taxes"
+],
+"You find someone badly hurt. What should you do first?": [
+"Move them right away to a more comfortable place",
+"Give them food and water to help them feel better",
+"Wait to see if they feel better on their own"
+],
+"Which is a sign that stress may be becoming unhealthy?": [
+"Feeling a little nervous the night before a big test",
+"Feeling excited and a bit jittery before a fun trip",
+"Getting butterflies in your stomach before a game"
+],
+"Why can air pollution on hot summer days be a health problem?": [
+"Hot air holds less oxygen, so everyone runs out of air",
+"Sunlight turns pollution into rain that burns the skin",
+"Pollution only hurts plants, so people don't need to worry"
+],
+"Why are wetlands important?": [
+"They stay dry most of the year and make good farmland",
+"They hold oil and natural gas that people can use",
+"They keep fish and birds away from towns"
+],
+"What mainly causes dead zones in the Chesapeake Bay?": [
+"Too many oysters use up the food that fish need to live",
+"Cold winter water freezes and traps fish under the ice",
+"Boat motors stir up the bottom and scare fish away"
+],
+"Maryland's Bay Restoration Fund (the \"flush fee\") mainly pays for what?": [
+"Building new highways and bridges around the Bay",
+"Buying sightseeing boats for tourists on the Bay",
+"Paying fishermen to stop catching crabs"
+],
+"What is a culture?": [
+"The kind of weather a place has over many years",
+"The land, rivers and mountains of a region",
+"The leaders who run a state or country"
+],
+"In 1774, colonists in Annapolis burned the ship Peggy Stewart. Why?": [
+"It was a pirate ship that had attacked Maryland towns",
+"It carried sick sailors who might spread smallpox",
+"It belonged to France, which was at war with the colonies"
+],
+"How did diseases such as smallpox, brought by Europeans, affect American Indian peoples?": [
+"Few people got sick, because the diseases were mild",
+"People grew stronger, because they quickly built up immunity",
+"Only animals were affected, so people stayed healthy"
+],
+"What did the Civil Rights Act of 1964 do?": [
+"Gave women across the country the right to vote in all elections",
+"Ended the Civil War and freed enslaved people in the South",
+"Added the Bill of Rights to the U.S. Constitution"
+],
+"What was Manifest Destiny?": [
+"A law that ended slavery in the new western territories",
+"A treaty with Britain that set the border with Canada",
+"A company that built the first transcontinental railroad"
+],
+"Why was the Articles of Confederation replaced by the Constitution?": [
+"The national government was so strong that the states had no power",
+"There was no Congress, so the President made every law",
+"Britain demanded a new plan as part of the peace treaty"
+],
+"Which is the strongest evidence for the claim \"Exercise improves mood\"?": [
+"A famous athlete saying that running makes them happy",
+"An ad for running shoes showing smiling runners",
+"A friend's guess that people who exercise seem happier"
+],
+"What is a trusted adult?": [
+"Anyone online who says they are a grown-up and is friendly",
+"Any stranger who is nice to you and offers you a treat",
+"Only a famous person you see on TV or online"
+],
+"Someone you've never met in person asks you to keep your online chats secret from your parents. What is this?": [
+"A normal part of making a new friend online",
+"A compliment that means they really like you",
+"A safe secret, since it's only chatting"
+],
+"How does regular physical activity help mental health?": [
+"It has no effect on the brain, only on the muscles",
+"It makes you so tired that you don't need to sleep",
+"It always causes stress, so it should be avoided"
+],
+"What does a rain garden do?": [
+"Sprays water on plants so they grow during dry weather",
+"Collects trash so it doesn't wash into storm drains",
+"Keeps weeds from growing in a yard"
+],
+"What mainly causes acid rain?": [
+"Salt from ocean waves that is blown into clouds",
+"Too many trees giving off oxygen into the air",
+"Dust from dirt roads that mixes with rain"
+],
+"Why is rising sea level a concern for low places like Smith Island in Maryland?": [
+"The island will rise along with the water",
+"Higher water brings more fish, which crowd out homes",
+"It only affects places far out in the ocean"
+],
+"Why are swimmers told to stay out of water with a harmful algal bloom?": [
+"The algae make the water too cold to swim in safely",
+"The algae are tiny animals that bite swimmers",
+"The algae turn the water so salty it burns the eyes"
+],
+"Sea level rise is causing more \"sunny day\" flooding in Annapolis. What is one effect on people?": [
+"More snow and ice on the roads in winter",
+"Cooler summers along the waterfront",
+"Fewer storms reaching the town"
+],
+"Where are the Ural Mountains?": ["In northern Africa", "In western South America", "In western North America"]
+};
+B.forEach(function(r){if(BETTER_W[r.q])r.w=BETTER_W[r.q];});
+
 /* ---------- catalog by grade ---------- */
 var SS_TOPICS={
  3:[["all","All units"],["civ","Unit 1: Civics"],["eco","Unit 2: Economics and Geography"],["his","Unit 3: History"]],
@@ -561,7 +783,26 @@ function Source(subj,grade,topic){
   this.subj=subj;this.grade=grade;this.topic=topic;this.seen={};this.used={};
 }
 function srcLabel(g,grade){return g<grade?"Grade "+g+" review":g>grade?(g===9?"Algebra 1 preview":"Grade "+g+" preview"):"Grade "+g;}
+/* kind of question, from its wording: numbers, quotes and the specific item are ignored,
+   so "What is 3 + 4?" and "What is 12 + 9?" count as the same kind */
+function kindOf(q){return q.replace(/"[^"]*"/g,'"_"').replace(/\$?[0-9][0-9.,\/]*/g,"N").replace(/:.*$/,":").replace(/\?.*$/,"?").split(" ").slice(0,6).join(" ");}
+/* no kind of question may be more than about 10% of what a student sees */
+var CAP=0.10;
 Source.prototype.next=function(level){
+  this.kinds=this.kinds||{};this.n=this.n||0;var best=null,bestC=1e9;
+  for(var t=0;t<30;t++){
+    /* if this tool's questions keep landing on an overused kind, borrow from a neighboring level */
+    var lv=t<12?level:[1,2,3][t%3];
+    var q=this._next(lv);if(!q)continue;if(lv!==level&&q.src.indexOf("·")<0)q.src+=" · a "+(lv<level?"easier":"harder")+" question, for variety";var k=kindOf(q.q),c=this.kinds[k]||0;
+    if(c<Math.max(2,Math.ceil(CAP*(this.n+1)))){best=q;break;}
+    if(c<bestC){if(best)this.release(best);best=q;bestC=c;}else this.release(q);
+  }
+  if(best){var kb=kindOf(best.q);this.kinds[kb]=(this.kinds[kb]||0)+1;this.n++;}
+  return best;
+};
+/* put back a question that was drawn but not used, so it can come up later */
+Source.prototype.release=function(q){delete this.seen[q.q];delete this.used[q.q];};
+Source.prototype._next=function(level){
   var self=this,tp=this.topic,gr=this.grade,s=this.subj,q,tries;
   if(s==="math"){
     var g=gr+(level-2),set=MG[g];
